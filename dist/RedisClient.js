@@ -1,11 +1,7 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -57,6 +53,16 @@ class RedisClient {
             data.poolTxId = value;
             //it will return OK
             return this.addKey(key, ttl, data);
+        });
+        this.subscribe = (channel) => __awaiter(this, void 0, void 0, function* () {
+            let data = "";
+            yield this.redisClient.subscribe(channel, (message) => {
+                data = message;
+            });
+            return data;
+        });
+        this.publish = (channel, message) => __awaiter(this, void 0, void 0, function* () {
+            return this.redisClient.publish(channel, message);
         });
         // if url is optional application will start using default redis url
         this.redisClient = redis.createClient({

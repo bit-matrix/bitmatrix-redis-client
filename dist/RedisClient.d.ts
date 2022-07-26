@@ -11,4 +11,6 @@ export declare class RedisClient implements IRedisClient {
     removeKey: (key: string) => Promise<number>;
     removeKeys: (keys: string[]) => Promise<number>;
     updateField: <T extends Custom>(key: string, value: string) => Promise<string>;
+    subscribe: (channel: string) => Promise<string>;
+    publish: (channel: string, message: string) => Promise<number>;
 }
