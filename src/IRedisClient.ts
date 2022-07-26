@@ -6,6 +6,8 @@ interface IRedisClient {
   removeKey: (key: string) => Promise<number>;
   removeKeys: (keys: string[]) => Promise<number>;
   updateField: (keys: string, value: string) => Promise<string>;
+  subscribe: (channel: string) => Promise<string>;
+  publish: (channel: string, message: string) => Promise<number>;
 }
 
 export default IRedisClient;

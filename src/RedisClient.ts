@@ -47,4 +47,18 @@ export class RedisClient implements IRedisClient {
     //it will return OK
     return this.addKey(key, ttl, data);
   };
+
+  subscribe = async (channel: string): Promise<string> => {
+    let data = "";
+
+    await this.redisClient.subscribe(channel, (message) => {
+      data = message;
+    });
+
+    return data;
+  };
+
+  publish = async (channel: string, message: string): Promise<number> => {
+    return this.redisClient.publish(channel, message);
+  };
 }
