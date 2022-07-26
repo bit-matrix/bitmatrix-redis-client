@@ -2,7 +2,6 @@ import { Custom } from "./Custom";
 import IRedisClient from "./IRedisClient";
 export declare class RedisClient implements IRedisClient {
     private redisClient;
-    url: string | undefined;
     constructor(url?: string);
     addKey: (key: string, seconds: number, value: object) => Promise<string>;
     getTTL: (key: string) => Promise<number>;
