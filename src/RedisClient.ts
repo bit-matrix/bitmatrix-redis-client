@@ -5,7 +5,6 @@ import IRedisClient from "./IRedisClient";
 
 export class RedisClient implements IRedisClient {
   private redisClient: RedisClientType;
-  url: string | undefined;
 
   constructor(url?: string) {
     // if url is optional application will start using default redis url
