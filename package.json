@@ -17,6 +17,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@bitmatrix/models": "^0.1.24",
     "redis": "^4.2.0"
   }
 }

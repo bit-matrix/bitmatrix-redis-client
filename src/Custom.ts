@@ -1,3 +1,5 @@
+import { poolTxInfo } from "@bitmatrix/models/PoolTxInfo";
+
 export type Custom = {
-  poolTxId: string;
+  poolTxInfo: poolTxInfo;
 };

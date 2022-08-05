@@ -1,3 +1,4 @@
+import { poolTxInfo } from "@bitmatrix/models/PoolTxInfo";
 import { RedisClientType } from "@redis/client";
 import * as redis from "redis";
 import { Custom } from "./Custom";
@@ -40,12 +41,14 @@ export class RedisClient implements IRedisClient {
 
   removeKeys = async (keys: string[]): Promise<number> => this.redisClient.del(keys);
 
-  updateField = async <T extends Custom>(key: string, value: string): Promise<string> => {
+  updateField = async <T extends Custom>(key: string, value: poolTxInfo): Promise<string> => {
     const ttl = await this.getTTL(key);
     const data = await this.getDataByKey<T>(key);
-    data.poolTxId = value;
+    const clonedData = { ...data };
+    clonedData.poolTxInfo = value;
+
     //it will return OK
-    return this.addKey(key, ttl, data);
+    return this.addKey(key, ttl, clonedData);
   };
 
   subscribe = async (channel: string): Promise<string> => {

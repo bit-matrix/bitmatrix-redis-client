@@ -1,3 +1,5 @@
+import { poolTxInfo } from "@bitmatrix/models/PoolTxInfo";
+
 interface IRedisClient {
   addKey: (key: string, seconds: number, value: object) => Promise<string>;
   getAllKeys: () => Promise<string[]>;
@@ -5,7 +7,7 @@ interface IRedisClient {
   getAllValues: <T>() => Promise<T[]>;
   removeKey: (key: string) => Promise<number>;
   removeKeys: (keys: string[]) => Promise<number>;
-  updateField: (keys: string, value: string) => Promise<string>;
+  updateField: (keys: string, value: poolTxInfo) => Promise<string>;
   subscribe: (channel: string) => Promise<string>;
   publish: (channel: string, message: string) => Promise<number>;
 }
