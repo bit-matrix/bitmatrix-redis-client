@@ -50,9 +50,10 @@ class RedisClient {
         this.updateField = (key, value) => __awaiter(this, void 0, void 0, function* () {
             const ttl = yield this.getTTL(key);
             const data = yield this.getDataByKey(key);
-            data.poolTxId = value;
+            const clonedData = Object.assign({}, data);
+            clonedData.poolTxInfo = value;
             //it will return OK
-            return this.addKey(key, ttl, data);
+            return this.addKey(key, ttl, clonedData);
         });
         this.subscribe = (channel) => __awaiter(this, void 0, void 0, function* () {
             let data = "";
